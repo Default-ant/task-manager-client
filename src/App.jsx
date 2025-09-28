@@ -120,5 +120,5 @@ const App = () => {
     </main>
   );
 };
-
+console.log("App component loaded");
 export default App;

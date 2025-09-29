@@ -15,6 +15,9 @@ import { useGetDasboardStatsQuery } from "../redux/slices/api/taskApiSlice";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
 import { useSelector } from "react-redux";
 
+import { Navigate } from "react-router-dom"; // if not already imported
+
+
 const Card = ({ label, count, bg, icon }) => {
   return (
     <div className='w-full h-32 bg-white p-5 shadow-md rounded-md flex items-center justify-between'>
@@ -38,6 +41,10 @@ const Card = ({ label, count, bg, icon }) => {
 const Dashboard = () => {
   const { data, isLoading, error } = useGetDasboardStatsQuery();
   const { user } = useSelector((state) => state.auth);
+
+  if (!user || !user.name || !user.email) {
+  return <Navigate to="/login" replace />;
+}
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });

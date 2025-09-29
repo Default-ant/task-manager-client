@@ -41,6 +41,8 @@ const Card = ({ label, count, bg, icon }) => {
 const Dashboard = () => {
   const { data, isLoading, error } = useGetDasboardStatsQuery();
   const { user } = useSelector((state) => state.auth);
+  console.log("Redux user:", user);
+
 
   if (!user || !user.name || !user.email) {
   return <Navigate to="/log-in" replace />;

@@ -15,8 +15,16 @@ import {
   StatusPage,
 } from "./pages";
 import { setOpenSidebar } from "./redux/slices/authSlice";
+import { Outlet } from "react-router-dom";
 
-function Layout() {
+return (
+  <div>
+    {/* header/sidebar */}
+    <Outlet /> {/* ✅ renders child route */}
+  </div>
+);
+
+const Layout() {
   const { user } = useSelector((state) => state.auth);
   const location = useLocation();
 

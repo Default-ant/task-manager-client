@@ -43,7 +43,7 @@ const Dashboard = () => {
   const { user } = useSelector((state) => state.auth);
 
   if (!user || !user.name || !user.email) {
-  return <Navigate to="/log-in" replace />;
+  return <Navigate to="/Login" replace />;
 }
 
   useEffect(() => {

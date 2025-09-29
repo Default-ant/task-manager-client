@@ -108,9 +108,10 @@ const App = () => {
             <Route path='/task/:id' element={<TaskDetail />} />
             <Route path='/team' element={<Users />} />
             <Route path='/status' element={<StatusPage />} />
+            <Route path='/log-in' element={<Login />} />
           </Route>
 
-          <Route path='/log-in' element={<Login />} />
+          
         </Routes>
       </div>
 

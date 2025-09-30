@@ -1,1 +1,5 @@
-return <div>Dashboard Loaded</div>;
+const Dashboard = () => {
+  return <div>Dashboard Loaded</div>;
+};
+
+export default Dashboard;

@@ -42,6 +42,13 @@ const Dashboard = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, []);
+  // ✅ Add this to confirm mount
+  useEffect(() => {
+    console.log("Dashboard mounted");
+    console.log("User:", user);
+    console.log("Dashboard data:", data);
+
+  }, []);
 
   const totals = data?.tasks || [];
 

@@ -93,6 +93,7 @@ const App = () => {
           <Route element={<ProtectedLayout />}>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/test" element={<div>Test route works!</div>} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/completed/:status?" element={<Tasks />} />
             <Route path="/in-progress/:status?" element={<Tasks />} />

@@ -1,3 +1,40 @@
+import clsx from "clsx";
+import moment from "moment";
+import React, { useEffect } from "react";
+import { FaNewspaper } from "react-icons/fa";
+import { FaArrowsToDot } from "react-icons/fa6";
+import { LuClipboardEdit } from "react-icons/lu";
+import {
+  MdAdminPanelSettings,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+  MdKeyboardDoubleArrowUp,
+} from "react-icons/md";
+import { Chart, Loading, UserInfo } from "../components";
+import { useGetDasboardStatsQuery } from "../redux/slices/api/taskApiSlice";
+import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils";
+import { useSelector } from "react-redux";
+
+const Card = ({ label, count, bg, icon }) => {
+  return (
+    <div className='w-full h-32 bg-white p-5 shadow-md rounded-md flex items-center justify-between'>
+      <div className='h-full flex flex-1 flex-col justify-between'>
+        <p className='text-base text-gray-600'>{label}</p>
+        <span className='text-2xl font-semibold'>{count}</span>
+        <span className='text-sm text-gray-400'>{"111 last month"}</span>
+      </div>
+      <div
+        className={clsx(
+          "w-10 h-10 rounded-full flex items-center justify-center text-white",
+          bg
+        )}
+      >
+        {icon}
+      </div>
+    </div>
+  );
+};
+
 const Dashboard = () => {
   const { data, isLoading, error } = useGetDasboardStatsQuery();
   const { user } = useSelector((state) => state.auth);
@@ -25,7 +62,7 @@ const Dashboard = () => {
     },
     {
       _id: "2",
-      label: "COMPLTED TASK",
+      label: "COMPLETED TASK",
       total: totals["completed"] || 0,
       icon: <MdAdminPanelSettings />,
       bg: "bg-[#0f766e]",
@@ -40,7 +77,7 @@ const Dashboard = () => {
     {
       _id: "4",
       label: "TODOS",
-      total: totals["todo"],
+      total: totals["todo"] || 0,
       icon: <FaArrowsToDot />,
       bg: "bg-[#be185d]" || 0,
     },
@@ -59,13 +96,16 @@ const Dashboard = () => {
           <h4 className='text-xl text-gray-500 font-bold mb-2'>
             Chart by Priority
           </h4>
-          <Chart data={data?.graphData} />
+          {data?.graphData && <Chart data={data.graphData} />}
+
         </div>
         <div className='w-full flex flex-col md:flex-row gap-4 2xl:gap-10 py-8'>
           {/* RECENT AUTHORS */}
-          {data && <TaskTable tasks={data?.last10Task} />}
+          {data?.last10Task && <TaskTable tasks={data.last10Task} />}
+
           {/* RECENT USERS */}
-          {data && user?.isAdmin && <UserTable users={data?.users} />}
+          {user?.isAdmin && data?.users && <UserTable users={data.users} />}
+
         </div>
       </>
     </div>

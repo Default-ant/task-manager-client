@@ -20,6 +20,12 @@ const App = () => {
   const theme = "light";
   const { user, isSidebarOpen } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (!user && storedUser) {
+      dispatch(setUser(storedUser));
+    }
+  }, []);
   const location = useLocation();
   const mobileMenuRef = useRef(null);
 

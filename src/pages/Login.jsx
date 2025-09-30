@@ -24,6 +24,7 @@ const Login = () => {
       const res = await login(data).unwrap();
 
       dispatch(setCredentials(res));
+      localStorage.setItem("user", JSON.stringify(res)); 
       navigate("/");
     } catch (err) {
       toast.error(err?.data?.message || err.error);

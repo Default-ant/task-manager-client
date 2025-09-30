@@ -31,7 +31,11 @@ const App = () => {
 
   // Redirect if user is not authenticated
   const ProtectedLayout = () => {
-    if (!user) {
+    if (user === null) {
+      return <div>Loading protected route...</div>;
+    }
+    
+    if (!user.name || !user.email) {
       return <Navigate to="/log-in" state={{ from: location }} replace />;
     }
 
@@ -88,7 +92,7 @@ const App = () => {
   return (
     <main className={theme}>
       <div className="w-full min-h-screen bg-[#f3f4f6] dark:bg-[#0d0d0df4]">
-        <Routes>
+        <Routes key={location.pathname}>
           {/* Public route */}
           <Route path="/log-in" element={<Login />} />
 

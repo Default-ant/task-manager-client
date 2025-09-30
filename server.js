@@ -10,8 +10,8 @@ const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, "dist")));
 
 // Catch-all route to serve index.html
-app.use((req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+app.get("*", function (req, res) {
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
 const PORT = process.env.PORT || 3000;

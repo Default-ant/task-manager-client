@@ -48,7 +48,7 @@ const Dashboard = () => {
     console.log("User:", user);
     console.log("Dashboard data:", data);
 
-  }, []);
+  }, [user, data]);
 
   const totals = data?.tasks || [];
 
@@ -58,6 +58,10 @@ const Dashboard = () => {
         <Loading />
       </div>
     );
+  if (error) {
+    console.error("Dashboard API Error:", error);
+    return <div>An error occurred while loading the dashboard. Please try again later.</div>;
+  }
 
   const stats = [
     {

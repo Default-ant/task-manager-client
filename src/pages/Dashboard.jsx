@@ -67,7 +67,11 @@ const Dashboard = () => {
   }
   
   // Now that we've confirmed data exists, it's safe to define totals
-  const totals = data?.tasks || [];
+const totals = data?.tasks || [];
+const graphData = data?.graphData || [];
+const last10Task = data?.last10Task || [];
+const users = data?.users || [];
+
   const stats = [
     {
       _id: "1",

@@ -50,7 +50,7 @@ const Dashboard = () => {
 
   }, [user, data]);
 
-  const totals = data?.tasks || [];
+
 
   if (isLoading)
     return (
@@ -62,7 +62,12 @@ const Dashboard = () => {
     console.error("Dashboard API Error:", error);
     return <div>An error occurred while loading the dashboard. Please try again later.</div>;
   }
-
+  if (!data) {
+    return <div>No dashboard data available.</div>;
+  }
+  
+  // Now that we've confirmed data exists, it's safe to define totals
+  const totals = data?.tasks || [];
   const stats = [
     {
       _id: "1",

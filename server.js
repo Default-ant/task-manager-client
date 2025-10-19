@@ -14,9 +14,7 @@ app.use(history());
 app.use(express.static(path.resolve(__dirname, "dist")));
 
 // ✅ Catch-all route for deep links
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
-});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

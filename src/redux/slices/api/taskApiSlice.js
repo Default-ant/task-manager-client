@@ -80,7 +80,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    getDasboardStats: builder.query({
+    getDashboardStats: builder.query({
       query: () => ({
         url: `${TASKS_URL}/dashboard`,
         method: "GET",

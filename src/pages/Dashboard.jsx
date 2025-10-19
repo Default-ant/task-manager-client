@@ -159,7 +159,11 @@ const UserTable = ({ users }) => {
   )
 }
 const Dashboard = () => {
-  const { data, isLoading } = useGetDashboardStatsQuery()
+  const { data, isLoading } = useGetDashboardStatsQuery()(undefined, {
+  refetchOnMountOrArgChange: false,
+  refetchOnReconnect: false,
+  });
+
 
   if (isLoading) {
     return (

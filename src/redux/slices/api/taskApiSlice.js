@@ -118,7 +118,7 @@ export const {
   useDuplicateTaskMutation,
   useUpdateTaskMutation,
   useGetSingleTaskQuery,
-  useGetDasboardStatsQuery,
+  useGetDashboardStatsQuery,
   useChangeTaskStageMutation,
   useChangeSubTaskStatusMutation,
 } = postApiSlice;

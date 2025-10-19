@@ -78,8 +78,8 @@ const Users = () => {
         setOpenAction(false);
       }, 500);
     } catch (error) {
-      console.log(err);
-      toast.error(err?.data?.message || err.error);
+      console.log(error);
+      toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -166,10 +166,17 @@ const Users = () => {
             <table className='w-full mb-5'>
               <TableHeader />
               <tbody>
-                {data?.map((user, index) => (
-                  <TableRow key={index} user={user} />
-                ))}
+                {Array.isArray(data) && data.length > 0 ? (
+                  data.map((user, index) => <TableRow key={index} user={user} />)
+                ) : (
+                  <tr>
+                    <td colSpan="6">
+                      <p className="text-center text-gray-500 py-4">No users found.</p>
+                    </td>
+                  </tr>
+                )}
               </tbody>
+
             </table>
           </div>
         </div>

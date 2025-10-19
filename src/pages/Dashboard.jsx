@@ -11,7 +11,7 @@ import {
     MdKeyboardDoubleArrowUp,
 } from "react-icons/md"
 import { Chart } from "../components/Chart"
-import Loading from "../components/Loader"
+import Loading from "../components/Loading"
 import UserInfo from "../components/UserInfo"
 import { useGetDashboardStatsQuery } from "../redux/slices/api/taskApiSlice"
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, getInitials } from "../utils"

@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useTrashTastMutation } from "../redux/slices/api/taskApiSlice.js";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils/index.js";
 
-import { Button, ConfirmatioDialog, UserInfo } from "./index";
+import { Button, ConfirmationDialog, UserInfo } from "./index";
 import { AddTask, TaskAssets, TaskColor } from "./tasks";
 import { Link } from "react-router-dom";
 
@@ -154,7 +154,7 @@ const Table = ({ tasks }) => {
         </div>
       </div>
 
-      <ConfirmatioDialog
+      <ConfirmationDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onClick={deleteHandler}

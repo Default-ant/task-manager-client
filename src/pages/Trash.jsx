@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import {
   AddUser,
   Button,
-  ConfirmatioDialog,
+  ConfirmationDialog,
   Loading,
   Title,
 } from "../components";
@@ -211,7 +211,7 @@ const Trash = () => {
 
       <AddUser open={open} setOpen={setOpen} />
 
-      <ConfirmatioDialog
+      <ConfirmationDialog
         open={openDialog}
         setOpen={setOpenDialog}
         msg={msg}

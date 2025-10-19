@@ -14,7 +14,7 @@ import {
   useDuplicateTaskMutation,
   useTrashTastMutation,
 } from "../../redux/slices/api/taskApiSlice";
-import ConfirmatioDialog from "../ConfirmationDialog";
+import ConfirmationDialog from "../ConfirmationDialog";
 import AddSubTask from "./AddSubTask";
 import AddTask from "./AddTask";
 import TaskColor from "./TaskColor";
@@ -256,7 +256,7 @@ export default function TaskDialog({ task }) {
         key={new Date().getTime()}
       />
       <AddSubTask open={open} setOpen={setOpen} />
-      <ConfirmatioDialog
+      <ConfirmationDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onClick={deleteHandler}

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import {
   AddUser,
   Button,
-  ConfirmatioDialog,
+  ConfirmationDialog,
   Loading,
   Title,
   UserAction,
@@ -59,8 +59,8 @@ const Users = () => {
         setOpenDialog(false);
       }, 500);
     } catch (error) {
-      console.log(err);
-      toast.error(err?.data?.message || err.error);
+      console.log(error);
+      toast.error(error?.data?.message || error.error);
     }
   };
 
@@ -84,7 +84,7 @@ const Users = () => {
   };
 
   useEffect(() => {
-    refetch();
+    if (!open) refetch();
   }, [open]);
 
   const TableHeader = () => (
@@ -95,6 +95,7 @@ const Users = () => {
         <th className='py-2'>Email</th>
         <th className='py-2'>Role</th>
         <th className='py-2'>Active</th>
+        <th className='py-2'>Actions</th>
       </tr>
     </thead>
   );
@@ -181,7 +182,7 @@ const Users = () => {
         key={new Date().getTime().toString()}
       />
 
-      <ConfirmatioDialog
+      <ConfirmationDialog
         open={openDialog}
         setOpen={setOpenDialog}
         onClick={deleteHandler}

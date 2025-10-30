@@ -25,7 +25,8 @@ const Tasks = () => {
 
   const status = params?.status || "";
 
-  const { data, isLoading, refetch } = useGetAllTaskQuery({
+  // 1. Get ALL states from the hook
+  const { data, isLoading, isError, error, refetch } = useGetAllTaskQuery({
     strQuery: status,
     isTrashed: "",
     search: searchTerm,
@@ -34,13 +35,40 @@ const Tasks = () => {
   useEffect(() => {
     refetch();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, [open]);
+  }, [open, refetch]); // Added refetch to dependency array
 
-  return isLoading ? (
-    <div className='py-10'>
-      <Loading />
-    </div>
-  ) : (
+  // 2. Handle Loading state
+  if (isLoading) {
+    return (
+      <div className='py-10'>
+        <Loading />
+      </div>
+    );
+  }
+
+  // 3. Handle Error state (NEW)
+  if (isError) {
+    return (
+      <div className='py-10 text-center text-red-500'>
+        <p>Error loading tasks.</p>
+        <p>{error?.data?.message || error.message}</p>
+      </div>
+    );
+  }
+
+  // 4. Handle No Data state (NEW)
+  // We check this *after* loading and error
+  if (!data) {
+    return (
+      <div className='py-10 text-center text-gray-500'>
+        <p>No tasks found.</p>
+      </div>
+    );
+  }
+
+  // --- If we get here, 'data' is guaranteed to exist ---
+
+  return (
     <div className='w-full'>
       <div className='flex items-center justify-between mb-4'>
         <Title title={status ? `${status} Tasks` : "Tasks"} />
@@ -69,9 +97,9 @@ const Tasks = () => {
           )}
 
           {selected === 0 ? (
-            <BoardView tasks={data?.tasks} />
+            <BoardView tasks={data?.tasks} /> 
           ) : (
-            <Table tasks={data?.tasks} />
+            <Table tasks={data?.tasks} /> 
           )}
         </Tabs>
       </div>

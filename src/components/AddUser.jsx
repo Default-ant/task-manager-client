@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { useRegisterMutation } from "../redux/slices/api/authApiSlice";
 import { useUpdateUserMutation } from "../redux/slices/api/userApiSlice";
 import { setCredentials } from "../redux/slices/authSlice";
-import { Button, Loading, ModalWrapper, Textbox } from "./";
+import { Button, Loading, ModalWrapper, Textbox } from ".";
 
 const AddUser = ({ open, setOpen, userData }) => {
   let defaultValues = userData ?? {};

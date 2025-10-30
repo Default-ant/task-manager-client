@@ -1,7 +1,8 @@
 const isDev = import.meta.env.DEV;
 
 const API_BASE_URL = isDev
-   import.meta.env.VITE_API_URL;
+  ? import.meta.env.VITE_API_BASE_URL_LOCAL
+  : import.meta.env.VITE_API_BASE_URL_PROD;
 
 // Example: Get all tasks
 export const getTasks = async () => {

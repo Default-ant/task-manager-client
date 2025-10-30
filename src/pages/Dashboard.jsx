@@ -1,7 +1,7 @@
 import React from "react"
 import { FaNewspaper } from "react-icons/fa"
 import { FaArrowsToDot } from "react-icons/fa6"
-import { LuClipboardEdit } from "react-icons/lu"
+import { LuClipboardList } from "react-icons/lu"
 import { MdAdminPanelSettings } from "react-icons/md"
 import { Chart } from "../components/Chart"
 import Loading from "../components/Loading"
@@ -11,40 +11,39 @@ import UserTable from "../components/dashboard/UserTable" // Import extracted co
 import { useGetDashboardStatsQuery } from "../redux/slices/api/taskApiSlice"
 
 const Dashboard = () => {
-  // 1. Get ALL the states
-  const { data, isLoading, isError, error } = useGetDashboardStatsQuery();
+  // Corrected the RTK Query hook syntax
+  const { data, isLoading } = useGetDashboardStatsQuery(undefined, {
+    refetchOnMountOrArgChange: false,
+    refetchOnReconnect: false,
+  })
 
-  // 2. Handle Loading
   if (isLoading) {
     return (
       <div className="py-10">
         <Loading />
       </div>
-    );
+    )
   }
-
-  // 3. Handle Error (THIS IS THE FIX)
-  // This will render an error message INSTEAD of a blank page
+// 2. Handle Error state (NEW)
   if (isError) {
+    console.error("Failed to load dashboard stats:", error) // This will now log to the console
     return (
       <div className="h-full py-4 text-center text-red-500">
-        <h1>An Error Occurred</h1>
-        <p>Could not load dashboard data.</p>
-        <p>{error?.data?.message || error.message || "Unknown error"}</p>
+        <p>Error: Could not load dashboard data.</p>
+        <p>{error.message || "An unknown error occurred."}</p>
       </div>
-    );
+    )
   }
 
-  // 4. Handle No Data
+  // 3. Handle No Data state (THE CRITICAL FIX)
+  // This catches the case where isLoading is false, isError is false, but data is still empty.
   if (!data) {
     return (
       <div className="py-10 text-center">
         <p>No dashboard data found.</p>
       </div>
-    );
+    )
   }
-
-  // --- If we get here, data EXISTS ---
 
   // --- If we get here, 'data' is guaranteed to exist ---
   const totals = data?.tasks || {} // Add default object to prevent errors
@@ -68,7 +67,7 @@ const Dashboard = () => {
       _id: "3",
       label: "TASK IN PROGRESS", // Fixed typo
       total: totals["in progress"] || 0,
-      icon: <LuClipboardEdit />,
+      icon: <LuClipboardList />,
       bg: "bg-[#f59e0b]",
     },
     {

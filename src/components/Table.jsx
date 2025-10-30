@@ -10,7 +10,7 @@ import { useTrashTastMutation } from "../redux/slices/api/taskApiSlice.js";
 import { BGS, PRIOTITYSTYELS, TASK_TYPE, formatDate } from "../utils/index.js";
 
 import { Button, ConfirmationDialog, UserInfo } from "./index";
-import { AddTask, TaskAssets, TaskColor } from "./tasks";
+import { AddTask, TaskAssets, TaskColor } from "./tasks/index.js";
 import { Link } from "react-router-dom";
 
 const ICONS = {

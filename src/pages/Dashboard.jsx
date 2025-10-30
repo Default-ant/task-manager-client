@@ -24,7 +24,28 @@ const Dashboard = () => {
       </div>
     )
   }
+// 2. Handle Error state (NEW)
+  if (isError) {
+    console.error("Failed to load dashboard stats:", error) // This will now log to the console
+    return (
+      <div className="h-full py-4 text-center text-red-500">
+        <p>Error: Could not load dashboard data.</p>
+        <p>{error.message || "An unknown error occurred."}</p>
+      </div>
+    )
+  }
 
+  // 3. Handle No Data state (THE CRITICAL FIX)
+  // This catches the case where isLoading is false, isError is false, but data is still empty.
+  if (!data) {
+    return (
+      <div className="py-10 text-center">
+        <p>No dashboard data found.</p>
+      </div>
+    )
+  }
+
+  // --- If we get here, 'data' is guaranteed to exist ---
   const totals = data?.tasks || {} // Add default object to prevent errors
 
   const stats = [

@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_APP_FIREBASE_API_KEY,
+  apiKey: import.meta.env.VITE_API_FIREBASE_API_KEY,
 
   authDomain: "task-manager-d68db.firebaseapp.com",
   projectId: "task-manager-d68db",

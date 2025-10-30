@@ -31,10 +31,13 @@ const Login = () => {
     }
   };
 
+// --- THIS IS THE FIX ---
   useEffect(() => {
-    user && navigate("/dashboard");
-  }, [user]);
-
+    // Only redirect if the user has a name (is *fully* authenticated)
+   if (user && user.name) { 
+      navigate("/dashboard");
+    }
+  }, [user, navigate]); // Also add 'navigate' to the dependency array
   return (
     <div className='w-full min-h-screen flex items-center justify-center flex-col lg:flex-row bg-[#f3f4f6] dark:bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#302943] via-slate-900 to-black'>
       <div className='w-full md:w-auto flex gap-0 md:gap-40 flex-col md:flex-row items-center justify-center'>

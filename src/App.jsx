@@ -27,7 +27,7 @@ const App = () => {
 
   // Wait for Redux to hydrate
 
-  console.log("User state:", user);
+
 
   // Redirect if user is not authenticated
   const ProtectedLayout = () => {

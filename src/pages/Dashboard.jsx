@@ -11,39 +11,40 @@ import UserTable from "../components/dashboard/UserTable" // Import extracted co
 import { useGetDashboardStatsQuery } from "../redux/slices/api/taskApiSlice"
 
 const Dashboard = () => {
-  // Corrected the RTK Query hook syntax
-  const { data, isLoading } = useGetDashboardStatsQuery(undefined, {
-    refetchOnMountOrArgChange: false,
-    refetchOnReconnect: false,
-  })
+  // 1. Get ALL the states
+  const { data, isLoading, isError, error } = useGetDashboardStatsQuery();
 
+  // 2. Handle Loading
   if (isLoading) {
     return (
       <div className="py-10">
         <Loading />
       </div>
-    )
+    );
   }
-// 2. Handle Error state (NEW)
-if (isError) {
-    console.error("Failed to load dashboard stats:", error);
+
+  // 3. Handle Error (THIS IS THE FIX)
+  // This will render an error message INSTEAD of a blank page
+  if (isError) {
     return (
       <div className="h-full py-4 text-center text-red-500">
-        <p>Error: Could not load dashboard data.</p>
-        <p>{error?.data?.message || error.message || "An unknown error occurred."}</p>
+        <h1>An Error Occurred</h1>
+        <p>Could not load dashboard data.</p>
+        <p>{error?.data?.message || error.message || "Unknown error"}</p>
       </div>
     );
   }
 
-  // 3. Handle No Data state (THE CRITICAL FIX)
-  // This catches the case where isLoading is false, isError is false, but data is still empty.
+  // 4. Handle No Data
   if (!data) {
     return (
       <div className="py-10 text-center">
         <p>No dashboard data found.</p>
       </div>
-    )
+    );
   }
+
+  // --- If we get here, data EXISTS ---
 
   // --- If we get here, 'data' is guaranteed to exist ---
   const totals = data?.tasks || {} // Add default object to prevent errors
